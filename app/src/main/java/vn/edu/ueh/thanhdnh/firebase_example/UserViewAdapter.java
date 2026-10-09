@@ -8,13 +8,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class UserViewAdapter extends RecyclerView.Adapter<UserViewHolder> {
+  private Context context;
   private LayoutInflater mInflater;
   private List<User> users;
 
   public UserViewAdapter(Context context, List<User> users) {
+    this.context = context;
     this.mInflater = LayoutInflater.from(context);
     this.users = users;
   }
@@ -33,8 +37,15 @@ public class UserViewAdapter extends RecyclerView.Adapter<UserViewHolder> {
   @Override
   public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
     User currentuser = users.get(position);
-    holder.getTxtName().setText(currentuser.getName());
-    holder.getTxtPhone().setText(currentuser.getPhone());
+    holder.getTxtUname().setText(currentuser.getUname());
+    holder.getTxtBio().setText(currentuser.getShort_bio());
+
+    if (currentuser.getUrl_profile() != null && !currentuser.getUrl_profile().isEmpty()) {
+      Glide.with(context)
+              .load(currentuser.getUrl_profile())
+              .placeholder(R.mipmap.ic_launcher)
+              .into(holder.getImgProfile());
+    }
   }
 
   @Override

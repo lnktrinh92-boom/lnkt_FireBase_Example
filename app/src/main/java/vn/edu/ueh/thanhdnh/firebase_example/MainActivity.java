@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
   FirebaseFirestore db;
   Button btAdd, btShow;
-  EditText etName, etPhone;
+  EditText etUname, etPassword, etUrlProfile, etShortBio;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     FirebaseApp.initializeApp(this);
     db = FirebaseFirestore.getInstance();
+
     btAdd = findViewById(R.id.btAdd);
     btShow = findViewById(R.id.btShow);
-    etName = findViewById(R.id.etName);
-    etPhone = findViewById(R.id.etPhone);
+    etUname = findViewById(R.id.etUname);
+    etPassword = findViewById(R.id.etPassword);
+    etUrlProfile = findViewById(R.id.etUrlProfile);
+    etShortBio = findViewById(R.id.etShortBio);
+
     btAdd.setOnClickListener(this);
     btShow.setOnClickListener(this);
   }
@@ -44,9 +48,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   @Override
   public void onClick(View view) {
     if (view.getId() == R.id.btAdd) {
-      db.collection("users").add(new User(etName.getText().toString(), etPhone.getText().toString()));
-      etName.setText("");
-      etPhone.setText("");
+      String uname = etUname.getText().toString();
+      String password = etPassword.getText().toString();
+      String urlProfile = etUrlProfile.getText().toString();
+      String shortBio = etShortBio.getText().toString();
+
+      User newUser = new User(uname, password, urlProfile, shortBio);
+      db.collection("users").add(newUser);
+
+      etUname.setText("");
+      etPassword.setText("");
+      etUrlProfile.setText("");
+      etShortBio.setText("");
     } else if (view.getId() == R.id.btShow) {
       Intent intent = new Intent(getBaseContext(), ShowDataActivity.class);
       startActivity(intent);
