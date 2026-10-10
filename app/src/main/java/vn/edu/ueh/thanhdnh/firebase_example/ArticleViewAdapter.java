@@ -1,6 +1,7 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,19 @@ public class ArticleViewAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
               .placeholder(R.mipmap.ic_launcher)
               .into(holder.getImgArticle());
     }
+
+    // THÊM SỰ KIỆN CLICK VÀO ĐÂY
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        // Gói object currentArticle vào Intent
+        intent.putExtra("ARTICLE_DATA", currentArticle);
+        // Bắt buộc thêm Flag này vì biến context truyền vào Adapter là BaseContext
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+      }
+    });
   }
 
   @Override
