@@ -24,8 +24,8 @@ import java.util.List;
 public class ShowDataActivity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView recyclerView;
-    List<User> users = new ArrayList<>();
-    UserViewAdapter adapter;
+    List<Article> articles = new ArrayList<>();
+    ArticleViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +41,22 @@ public class ShowDataActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         recyclerView = findViewById(R.id.reclyclerview);
-        adapter = new UserViewAdapter(getBaseContext(), users);
+        adapter = new ArticleViewAdapter(getBaseContext(), articles);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        db.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("articles").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException error) {
                 if (snapshots != null) {
-                    users.clear();
+                    articles.clear();
                     for (QueryDocumentSnapshot q : snapshots) {
-                        User user = q.toObject(User.class);
-                        user.setId(q.getId()); // Lưu lại ID document của Firestore
-                        users.add(user);
+                        Article article = q.toObject(Article.class);
+                        article.setId(q.getId());
+                        articles.add(article);
                     }
-                    adapter.update(users);
+                    adapter.update(articles);
                     adapter.notifyDataSetChanged();
                 }
             }

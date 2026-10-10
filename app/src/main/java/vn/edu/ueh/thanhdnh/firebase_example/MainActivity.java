@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
   FirebaseFirestore db;
   Button btAdd, btShow;
-  EditText etUname, etPassword, etUrlProfile, etShortBio;
+  EditText etTitle, etContent, etImageUrl;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     btAdd = findViewById(R.id.btAdd);
     btShow = findViewById(R.id.btShow);
-    etUname = findViewById(R.id.etUname);
-    etPassword = findViewById(R.id.etPassword);
-    etUrlProfile = findViewById(R.id.etUrlProfile);
-    etShortBio = findViewById(R.id.etShortBio);
+    etTitle = findViewById(R.id.etTitle);
+    etContent = findViewById(R.id.etContent);
+    etImageUrl = findViewById(R.id.etImageUrl);
 
     btAdd.setOnClickListener(this);
     btShow.setOnClickListener(this);
@@ -48,18 +47,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   @Override
   public void onClick(View view) {
     if (view.getId() == R.id.btAdd) {
-      String uname = etUname.getText().toString();
-      String password = etPassword.getText().toString();
-      String urlProfile = etUrlProfile.getText().toString();
-      String shortBio = etShortBio.getText().toString();
+      String title = etTitle.getText().toString();
+      String content = etContent.getText().toString();
+      String imageUrl = etImageUrl.getText().toString();
 
-      User newUser = new User(uname, password, urlProfile, shortBio);
-      db.collection("users").add(newUser);
+      Article newArticle = new Article(title, content, imageUrl);
+      db.collection("articles").add(newArticle);
 
-      etUname.setText("");
-      etPassword.setText("");
-      etUrlProfile.setText("");
-      etShortBio.setText("");
+      etTitle.setText("");
+      etContent.setText("");
+      etImageUrl.setText("");
     } else if (view.getId() == R.id.btShow) {
       Intent intent = new Intent(getBaseContext(), ShowDataActivity.class);
       startActivity(intent);

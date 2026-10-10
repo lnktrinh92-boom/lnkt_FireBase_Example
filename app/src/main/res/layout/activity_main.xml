@@ -4,61 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:gravity="center_vertical">
 
   <EditText
-      android:id="@+id/etUname"
+      android:id="@+id/etTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:hint="Nhập Username"
-      android:inputType="text" />
+      android:hint="Nhập Title (Tiêu đề)"
+      android:layout_marginBottom="10dp" />
 
   <EditText
-      android:id="@+id/etPassword"
+      android:id="@+id/etContent"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:hint="Nhập Password"
-      android:inputType="textPassword" />
+      android:hint="Nhập Content (Nội dung)"
+      android:layout_marginBottom="10dp" />
 
   <EditText
-      android:id="@+id/etUrlProfile"
+      android:id="@+id/etImageUrl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:hint="Nhập URL ảnh đại diện (vd: https://...)"
-      android:inputType="textUri" />
+      android:hint="Nhập Link ảnh (Image URL)"
+      android:layout_marginBottom="20dp" />
 
-  <EditText
-      android:id="@+id/etShortBio"
+  <Button
+      android:id="@+id/btAdd"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="20dp"
-      android:hint="Nhập tiểu sử ngắn"
-      android:inputType="text" />
+      android:text="Add Article"
+      android:layout_marginBottom="10dp" />
 
-  <LinearLayout
+  <Button
+      android:id="@+id/btShow"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:weightSum="2">
-
-    <Button
-        android:id="@+id/btAdd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginEnd="5dp"
-        android:text="Thêm User" />
-
-    <Button
-        android:id="@+id/btShow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="5dp"
-        android:text="Xem Danh Sách" />
-  </LinearLayout>
+      android:text="Show Data" />
 
 </LinearLayout>
